@@ -20,12 +20,11 @@ def index():
     events = Event.query.all()
     return render_template('index.html', events=events)
 
-
 @main.route('/event/<event_id>', methods=['GET'])
 def event_detail(event_id):
     """Show a single event."""
-    # TODO: Get the event with the given id and send to the template
-    return render_template('event_detail.html')
+    event = Event.query.filter_by(id=event_id).one()
+    return render_template('event_detail.html', event=event)
 
 
 @main.route('/event/<event_id>', methods=['POST'])
