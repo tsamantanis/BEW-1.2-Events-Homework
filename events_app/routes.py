@@ -17,8 +17,8 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def index():
     """Show upcoming events to users!"""
-    # TODO: Get all events and send to the template
-    return render_template('index.html')
+    events = Event.query.all()
+    return render_template('index.html', events=events)
 
 
 @main.route('/event/<event_id>', methods=['GET'])
@@ -36,16 +36,16 @@ def rsvp(event_id):
     guest_name = request.form.get('guest_name')
 
     if is_returning_guest:
-        # TODO: Look up the guest by name, and add the event to their 
+        # TODO: Look up the guest by name, and add the event to their
         # events_attending, then commit to the database
         pass
     else:
         guest_email = request.form.get('email')
         guest_phone = request.form.get('phone')
-        # TODO: Create a new guest with the given name, email, and phone, and 
+        # TODO: Create a new guest with the given name, email, and phone, and
         # add the event to their events_attending, then commit to the database
         pass
-    
+
     flash('You have successfully RSVP\'d! See you there!')
     return redirect(url_for('main.event_detail', event_id=event_id))
 
@@ -66,7 +66,7 @@ def create():
         except ValueError:
             print('there was an error: incorrect datetime format')
 
-        # TODO: Create a new event with the given title, description, & 
+        # TODO: Create a new event with the given title, description, &
         # datetime, then add and commit to the database
 
         flash('Event created.')
