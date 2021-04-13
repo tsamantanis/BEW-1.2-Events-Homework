@@ -8,11 +8,11 @@
 {% if events %}
   {% for event in events %}
     <div class="event-container">
-        <h3><a href="/event/1">{{ event.event_title }}</a></a></h3>
+        <h3><a href="/event/{{event.id}}">{{ event.title }}</a></a></h3>
         <p><strong>Date and Time:</strong> {{ event.date_and_time.strftime("%A %B %d, %Y at %H:%M %p") }}</p>
         <p><strong>Description:</strong> {{ event.description }}</p>
         <p class="small-text">
-            {{ event.guests_attending.length }} attending
+            {{ event.guests_attending | length }} attending
         </p>
     </div>
   {% endfor %}
